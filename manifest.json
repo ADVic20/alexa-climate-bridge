@@ -2,10 +2,10 @@
   "domain": "alexa_climate_bridge",
   "name": "Alexa Climate Bridge",
   "version": "0.1.0",
-  "documentation": "https://github.com/TU_USUARIO/alexa-climate-bridge",
-  "issue_tracker": "https://github.com/TU_USUARIO/alexa-climate-bridge/issues",
+  "documentation": "https://github.com/ADVic20/alexa-climate-bridge",
+  "issue_tracker": "https://github.com/ADVic20/alexa-climate-bridge/issues",
   "codeowners": [
-    "@TU_USUARIO"
+    "@ADVic20"
   ],
   "config_flow": true,
   "integration_type": "device",
