@@ -47,7 +47,7 @@ class AlexaController:
 
         modes = {
             "off": None,
-            "cool": "frío",
+            "cool": "enfriamiento",
             "heat": "calor",
             "dry": "deshumidificador",
             "fan_only": "ventilador",
