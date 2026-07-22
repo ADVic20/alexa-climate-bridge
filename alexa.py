@@ -40,7 +40,7 @@ class AlexaController:
 
     async def set_temperature(self, temperature: float):
         await self._send_command(
-            f"pon {self.climate_name} a {round(temperature)} grados"
+            f"pon {self.climate_name} a {round(temperature)}"
         )
 
     async def set_hvac_mode(self, mode: str):
