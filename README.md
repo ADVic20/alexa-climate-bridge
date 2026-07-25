@@ -1,119 +1,222 @@
-Alexa Climate Bridge
+# ❄️ Alexa Climate Bridge
 
-Bridge between Home Assistant and Amazon Alexa for advanced climate control.
+**Advanced climate bridge between Home Assistant and Amazon Alexa.**
 
-Alexa Climate Bridge allows Home Assistant to control climate devices exposed through Amazon Alexa by providing a simple MQTT bridge and bidirectional synchronization.
+Alexa Climate Bridge is a Home Assistant custom integration that allows advanced control of Alexa-compatible climate devices directly from Home Assistant.
 
-It is designed for devices that are fully supported in the Alexa ecosystem but have limited or no native integration with Home Assistant.
+It is designed for devices that work correctly inside the Amazon Alexa ecosystem but have limited or no native support in Home Assistant.
 
-Features
-🌡️ Control Alexa climate devices from Home Assistant.
-🔄 Bidirectional synchronization.
-⚡ Real-time state updates.
-🏠 MQTT Auto Discovery for Home Assistant.
-❄️ Supports HVAC modes.
-🌬️ Supports fan speed.
-🎯 Supports target temperature.
-🔌 Lightweight and easy to install.
-🐧 Optimized for Linux and Proxmox.
-Supported Features
-Power On / Off
-HVAC Mode
-Target Temperature
-Current Temperature
-Fan Mode
-Preset Modes (when supported)
-Swing Mode (optional)
-Requirements
-Home Assistant
-Amazon Alexa
-MQTT Broker (Mosquitto recommended)
-Linux (Debian/Ubuntu/Proxmox)
-Installation
+The integration creates a native Home Assistant climate entity, allowing control through dashboards, automations, scripts, and voice assistants.
+
+---
+
+# ✨ Features
+
+🌡️ **Home Assistant Climate Entity**  
+Creates a native climate device inside Home Assistant.
+
+🔄 **Bidirectional Synchronization**  
+Keeps climate states synchronized between Home Assistant and Alexa.
+
+⚡ **Real-Time Updates**  
+Fast updates when temperature, power, or modes change.
+
+🏠 **Native Home Assistant Integration**  
+No YAML configuration required.
+
+❄️ **HVAC Modes Support**  
+Supports available climate modes depending on the device.
+
+🌬️ **Fan Speed Control**  
+Control supported fan modes.
+
+🎯 **Target Temperature Control**  
+Set desired temperature directly from Home Assistant.
+
+🔌 **Automation Ready**  
+Works with:
+- Automations
+- Scripts
+- Scenes
+- Dashboards
+- Voice assistants
+
+---
+
+# 🚀 Supported Features
+
+| Feature | Support |
+|---|---|
+| Power ON/OFF | ✅ |
+| Target Temperature | ✅ |
+| Current Temperature | ✅ |
+| HVAC Modes | ✅ |
+| Fan Modes | ✅ |
+| Preset Modes | ⚙️ Device dependent |
+| Swing Mode | ⚙️ Optional |
+
+---
+
+# 📋 Requirements
+
+Before installing:
+
+- Home Assistant
+- Amazon Alexa integration
+- A supported Alexa climate device
+
+Compatible with:
+
+✅ Home Assistant OS  
+✅ Home Assistant Container  
+✅ Home Assistant Supervised  
+✅ Home Assistant running in LXC  
+✅ Home Assistant running in Virtual Machine  
+
+---
+
+# 📦 Installation
+
+## Method 1 - Manual Installation
+
+Download or clone the repository:
+
+```bash
+cd /config/custom_components
+
+git clone https://github.com/ADVic20/AlexaClimateBridge.git
+
+The final structure should look like:
+
+custom_components
+│
+└── alexa_climate_bridge
+    │
+    ├── __init__.py
+    ├── climate.py
+    ├── config_flow.py
+    ├── manifest.json
+    └── ...
+
+Restart Home Assistant:
+
+Settings
+ → System
+ → Restart Home Assistant
+Installation using VS Code / Code Server
+
+If you use the Home Assistant VS Code add-on:
+
+Open:
+
+/config/custom_components/
 
 Clone the repository:
 
-git clone https://github.com/<username>/AlexaClimateBridge.git
-cd AlexaClimateBridge
+git clone https://github.com/ADVic20/AlexaClimateBridge.git
 
-Run the installer:
+or copy the integration folder manually.
 
-chmod +x install.sh
-sudo ./install.sh
-MQTT Topics
+Verify that the folder name matches the integration:
 
-Example:
+/config/custom_components/alexa_climate_bridge
 
-alexa_climate/living_room/state
-alexa_climate/living_room/command
-alexa_climate/living_room/availability
-Home Assistant
+Restart Home Assistant.
 
-The bridge supports MQTT Discovery.
+⚙️ Configuration
 
-After installation, Home Assistant automatically creates the climate entity.
+After installation:
+
+Go to:
+
+Settings
+ → Devices & Services
+ → Add Integration
+
+Search for:
+
+Alexa Climate Bridge
+
+Follow the setup wizard.
+
+No YAML configuration is required.
+
+🏠 Home Assistant Entity
+
+After setup, Home Assistant creates a climate entity:
 
 Example:
 
 climate.living_room_ac
 
-No manual YAML configuration is required.
+The entity can be used in:
 
-Configuration
+Lovelace dashboards
+Automations
+Scripts
+Scenes
 
 Example:
 
-DEVICE_NAME=Living Room AC
-
-MQTT_HOST=192.168.1.10
-MQTT_PORT=1883
-MQTT_USER=mqtt
-MQTT_PASSWORD=password
-
-ALEXA_DEVICE=Living Room AC
-Example Automations
-
-Turn on the air conditioner when the temperature exceeds 28°C.
-
-trigger:
-  - platform: numeric_state
-    entity_id: sensor.living_room_temperature
-    above: 28
-
-action:
-  - service: climate.turn_on
-    target:
-      entity_id: climate.living_room_ac
-Architecture
+service: climate.set_temperature
+target:
+  entity_id: climate.living_room_ac
+data:
+  temperature: 23
+🏗️ Architecture
 Amazon Alexa
-       │
-       ▼
+      │
+      ▼
 Alexa Climate Bridge
-       │
-       ▼
-     MQTT
-       │
-       ▼
+      │
+      ▼
 Home Assistant
-Roadmap
-Support multiple climate devices.
-Automatic device discovery.
-Preset modes.
-Swing mode.
-Fan speed presets.
-Better logging.
-Docker support.
-Home Assistant Add-on.
-License
+      │
+      ▼
+Automations / Dashboard / Voice Control
+🔄 Updating
+
+To update the integration:
+
+Open the integration folder:
+
+cd /config/custom_components/alexa_climate_bridge
+
+Download the latest changes:
+
+git pull
+
+Restart Home Assistant.
+
+🛣️ Roadmap
+
+Future improvements:
+
+ Multiple climate devices
+ Automatic device discovery
+ Improved device compatibility
+ More preset modes
+ Advanced diagnostics
+ Better error reporting
+ HACS support
+🤝 Contributing
+
+Contributions are welcome.
+
+If you find a bug or have an idea:
+
+Open an issue
+Describe the problem
+Provide logs if possible
+
+Pull requests are welcome.
+
+📄 License
 
 MIT License
 
-Contributing
-
-Pull Requests are welcome.
-
-For major changes, please open an issue first.
-
-Credits
+👨‍💻 Credits
 
 Created by ADVic20
+
+⭐ If this project helps your Home Assistant setup, consider giving it a star.
